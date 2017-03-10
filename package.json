@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/tlabna/frontend-nanodegree-mobile-portfolio/issues"
   },
-  "homepage": "https://github.com/tlabna/frontend-nanodegree-mobile-portfolio#readme"
+  "homepage": "https://github.com/tlabna/frontend-nanodegree-mobile-portfolio#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-image-resize": "^0.12.0",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-uglify": "^2.1.0"
+  }
 }
