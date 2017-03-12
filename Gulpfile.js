@@ -17,24 +17,36 @@ gulp.task('resizePizzeria', function () {
 
 // Minify CSS
 gulp.task('minifycss', function() {
-  gulp.src('src/css/*.css')
+    gulp.src('src/css/*.css')
     .pipe(cleanCSS())
     .pipe(gulp.dest('dist/css'));
+
+    gulp.src('src/views/css/*.css')
+    .pipe(cleanCSS())
+    .pipe(gulp.dest('dist/views/css'));
 });
 
 
 // Minify JavaScript
 gulp.task('minifyjs', function() {
-  gulp.src('src/js/*.js')
+    gulp.src('src/js/*.js')
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
+
+    gulp.src('src/views/js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/views/js'));
 });
 
 // Minify HTML
 gulp.task('minifyhtml', function() {
-  gulp.src('src/*.html')
+    gulp.src('src/*.html')
     .pipe(minifyHTML())
     .pipe(gulp.dest('dist/'));
+
+    gulp.src('src/views/*.html')
+    .pipe(minifyHTML())
+    .pipe(gulp.dest('dist/views'));
 });
 
 gulp.task('default', [ 'resizePizzeria', 'minifycss', 'minifyjs', 'minifyhtml' ]);
