@@ -112,9 +112,9 @@ npm install --save-dev gulp gulp-image-resize gulp-imagemin gulp-minify-css gulp
 |   Test    |   Result  |
 |-----------|-----------|
 |   PageSpeed Score before optimizations    |   Mobile: 31/100, Desktop: 70/100  |
-|   PageSpeed Score **after** optimizations |   Mobile: 86/100, Desktop: 92/100  |
+|   PageSpeed Score **after** optimizations |   Mobile: 87/100, Desktop: 93/100  |
 |   Frame Rate before optimizations         |   FPS: ~20 *(from chrome dev tool fps meter)*, Average scripting time to generate last 10 frames: ~6ms |
 |   Frame Rate **after** optimizations      |   FPS: ~60 *(from chrome dev tool fps meter)*, Average scripting time to generate last 10 frames: ~0.3ms|
 |   Time to resize pizzas before optimizations  |   ~250ms  |
-|   Time to resize pizzas **after** optimizations   |   ~2ms    |
+|   Time to resize pizzas **after** optimizations   |   ~1.2ms    |
 
