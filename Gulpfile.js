@@ -3,15 +3,24 @@ var imageResize = require('gulp-image-resize');
 var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var minifyHTML = require('gulp-minify-html');
+var rename = require("gulp-rename");
 
 // Resize pizzeria.jpg since it's too large and we can save on file size
 gulp.task('resizePizzeria', function () {
-  gulp.src('src/views/images/pizzeria.jpg')
+    gulp.src('src/views/images/pizzeria.jpg')
     .pipe(imageResize({
       width : 573,
       height: 430,
       quality: 1
     }))
+    .pipe(gulp.dest('dist/views/images'));
+
+    gulp.src('src/views/images/pizzeria.jpg')
+    .pipe(imageResize({
+      width : 100,
+      quality: 1
+    }))
+    .pipe(rename({suffix: '_small'}))
     .pipe(gulp.dest('dist/views/images'));
 });
 

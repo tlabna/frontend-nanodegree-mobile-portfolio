@@ -25,7 +25,7 @@ Detailed Python Simple Server instructions can been found [here](https://docs.py
 **2.** Install packages needed for project
 
 ```
-npm install --save-dev gulp gulp-image-resize gulp-imagemin gulp-minify-css gulp-uglify gulp-minify-html
+npm install --save-dev gulp gulp-image-resize gulp-rename gulp-imagemin gulp-minify-css gulp-uglify gulp-minify-html
 ```
 
 **3.** To run, type ```$ gulp``` to run all automations
@@ -42,7 +42,7 @@ npm install --save-dev gulp gulp-image-resize gulp-imagemin gulp-minify-css gulp
 - Inlined ```css/styles.css```
 - Added ```media="print"``` in ```<link href="css/print.css" rel="stylesheet" >```
 - Added ```async``` to all script tags & inlined at the bottom of body.
-- Resized `pizzeria.jpg` image using gulp `gulp-image-resize`.
+- Resized `pizzeria.jpg` image using gulp `gulp-image-resize`. Created smaller version of image (pizzeria_small.jpg) for index.html and removed styling in `index.html`.
 - Optimized all images using [ImageOptim](https://imageoptim.com/)
 - Minified all CSS files used by index.html using gulp `gulp-minify-css`.
 - Minified all JS files using gulp `gulp-uglify`
@@ -53,7 +53,7 @@ npm install --save-dev gulp gulp-image-resize gulp-imagemin gulp-minify-css gulp
 |   Test    |   Mobile  |   Desktop |
 |-----------|-----------|-----------|
 |   PageSpeed Score before optimizations    |   27/100  | 29/100    |
-|   PageSpeed Score **after** optimizations |   90/100  |   91/100  |
+|   PageSpeed Score **after** optimizations |   94/100  |   95/100  |
 <br>
 <hr />
 
