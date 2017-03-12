@@ -95,17 +95,19 @@ npm install --save-dev gulp gulp-image-resize gulp-rename gulp-imagemin gulp-min
     - Created a variable and put out of this function. Variable keeps an array of all pizza elements on the page.
     - Moved `dx` and `newwidth` variables out of for loop since they can be computed in one iteration.
 - for loop that creates and appends all of the pizzas when the page loads:
-    - Changed the number of pizza to 20 from 200.
+    - Changed the number of pizza to 100 from 200.
     - Moved pizzaDiv variable outside of the for loop
 - `function updatePositions()`:
     - Changed `querySelectorAll` to `getElementsByClassNames`
     - Defined the variable "phase" outside the for loop
     - Created variable `scroll` out of for loop instead of `document.body.scrollTop / 1250` being calculated repeatedly in each loop iteration
-    - Added translateX() and translateZ(0) transform functions to the sliding pizza elements within the updatePositions function.
+    - Added translateX() transform function to the sliding pizza elements within the updatePositions function.
 - EventListener for **DOMContentLoaded**:
     - Add variable `elem` outside of for loop
     - Changed `querySelector` to `getElementById`
-    - Changed generating number of sliding pizza iterations to 20 from 200
+    - Changed generating number of sliding pizza iterations to 24 from 200
+    - Add style left since using translateX context of the transform property
+    - Add variable `movingPizzas` outside for loop.
 
 #### Improvements after optimizations
 

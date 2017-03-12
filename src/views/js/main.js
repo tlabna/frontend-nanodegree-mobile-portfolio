@@ -506,8 +506,8 @@ window.performance.mark("mark_start_generating"); // collect timing data
 // This for-loop actually creates and appends all of the pizzas when the page loads
 // Moved variable outside of the function to reduce dom calls
 var pizzasDiv = document.getElementById("randomPizzas");
-// Changed the number of pizzas to 20 since 200 is too much
-for (var i = 2; i < 20; i++) {
+// Changed the number of pizzas to 24 since 200 is too much
+for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -548,9 +548,10 @@ function updatePositions() {
   for (var i = 0; i < items.length; i++) {
     phase = Math.sin((scroll) + (i % 5));
     // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    var left = -items[i].basicLeft + 1000 * phase + 'px';
+    //var left = -items[i].basicLeft + 1000 * phase + 'px';
         // translateX() and translateZ(0) transform functions to the sliding pizza elements within the updatePositions function to improve css animations
-        items[i].style.transform = "translateX("+left+") translateZ(0)";
+        //items[i].style.transform = "translateX("+left+") translateZ(0)";
+        items[i].style.transform = 'translateX(' + 100 * phase + 'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -573,16 +574,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Creating variable outside of loop so it's not created at each iteration
   var elem;
-  for (var i = 0; i < 20; i++) {
+  //Change querySelector to getElementById for faster performance
+  var movingPizzas = document.getElementById('movingPizzas1');
+  // Change number of pizzas to 24
+  for (var i = 0; i < 24; i++) {
     elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
+    // Changing this variable sinze using translateX context of transform property
+    //elem.basicLeft = (i % cols) * s;
+    elem.style.left = (i % cols) * s + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    //Change querySelector to getElementById for faster performance
-    document.getElementById("movingPizzas1").appendChild(elem);
+    // Moved DOM call to outside of loop, instead of calling at each iteration
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });
