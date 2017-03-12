@@ -1,55 +1,120 @@
-## Website Performance Optimization portfolio project
+# Performance Website Optimization
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+## Getting Started
 
-To get started, check out the repository and inspect the code.
+###### Locally
 
-### Getting started
+**1.** Clone this repo
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+**2.** Change working directory to ``` /dist ```
 
-Some useful tips to help you get started:
+**3.** Serve the website: ``` $ python -m SimpleHTTPServer 8080```
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+Detailed Python Simple Server instructions can been found [here](https://docs.python.org/2/library/basehttpserver.html).
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+**4.** Open the website in your browser at ``` http://localhost:8000 ```
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
+**5.** Download [ngrok](https://ngrok.com/download) to tunnel local webserver. Instructions are on the [ngrok site](https://ngrok.com/docs#expose) ``` $ ngrok http 8080 ```
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ./ngrok http 8080
-  ```
+- To test pagespeed use [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/). Use http link returned from ngrok.
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+###### Using Gulp
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+**1.** Download [gulp](https://www.npmjs.com/package/gulp). Gulp is the tool used for automation.
 
-####Part 2: Optimize Frames per Second in pizza.html
+**2.** Install packages needed for project
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+```
+npm install --save-dev gulp gulp-image-resize gulp-imagemin gulp-minify-css gulp-uglify gulp-minify-html
+```
 
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+**3.** To run, type ```$ gulp``` to run all automations
+<br>
+<hr />
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+## Page Speed Score
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+**Critical Rendering Path:** ```index.html``` must achieve a PageSpeed score of at least 90 for both Mobile and Desktop.
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+#### Optimizations
+
+- Removed google font api call and used [Web Font Loader](https://github.com/typekit/webfontloader) script. Inlined at bottom of body.
+- Inlined ```css/styles.css```
+- Added ```media="print"``` in ```<link href="css/print.css" rel="stylesheet" >```
+- Added ```async``` to all script tags & inlined at the bottom of body.
+- Resized `pizzeria.jpg` image using gulp `gulp-image-resize`.
+- Optimized all images using [ImageOptim](https://imageoptim.com/)
+- Minified all CSS files used by index.html using gulp `gulp-minify-css`.
+- Minified all JS files using gulp `gulp-uglify`
+- Minified all HTML files using gulp `gulp-minify-html`
+
+#### Improvements after optimizations
+
+|   Test    |   Mobile  |   Desktop |
+|-----------|-----------|-----------|
+|   PageSpeed Score before optimizations    |   27/100  | 29/100    |
+|   PageSpeed Score **after** optimizations |   90/100  |   91/100  |
+<br>
+<hr />
+
+## Get Rid Of Jank
+
+**Frame Rate:** Optimizations made to `views/js/main.js` make `views/pizza.html` render with a consistent frame-rate at 60fps when scrolling.
+
+**Computational Efficiency:** Time to resize pizzas is less than 5 ms using the pizza size slider on the `views/pizza.html` page. Resize time is shown in the browser developer tools.
+
+#### Optimizations
+
+*Note. Comments have been left in the files above explaining changes in more detail.*
+
+###### General optimizations
+
+- Added missing meta and title tags
+```
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name=description content="Cam's Pizzeria">
+<meta name=author content="">
+<title>Cam's Pizzeria</title>
+```
+- Minified CSS (style.css and bootstrap-grid.css) using gulp `gulp-minify-css` and later inlined into `pizza.html`
+- Minified all JS files, specficially `main.js` file using gulp `gulp-uglify` and later inlined into `pizza.html` at the bottom of body.
+- Minified HTML file `pizza.html` using gulp `gulp-minify-html'
+
+
+###### Optimizations in `views/js/main.js`
+
+- `function changeSliderLabel()`:
+    - Changed `querySelector` to `getElementById`
+    - Store pizzaSize variable out of the function
+- `function determineDx()`:
+    - Changed `querySelector` to `getElementById`
+- `function changePizzaSizes()`:
+    - Moved code in `function determineDx()` inside this function to avoid repetition and optimized code for quicker calculations
+    - Changed `querySelectorAll` to `getElementsByClassNames` for collection of pizza containers.
+    - Created a variable and put out of this function. Variable keeps an array of all pizza elements on the page.
+    - Moved `dx` and `newwidth` variables out of for loop since they can be computed in one iteration.
+- for loop that creates and appends all of the pizzas when the page loads:
+    - Changed the number of pizza to 20 from 200.
+    - Moved pizzaDiv variable outside of the for loop
+- `function updatePositions()`:
+    - Changed `querySelectorAll` to `getElementsByClassNames`
+    - Defined the variable "phase" outside the for loop
+    - Created variable `scroll` out of for loop instead of `document.body.scrollTop / 1250` being calculated repeatedly in each loop iteration
+    - Added translateX() and translateZ(0) transform functions to the sliding pizza elements within the updatePositions function.
+- EventListener for **DOMContentLoaded**:
+    - Add variable `elem` outside of for loop
+    - Changed `querySelector` to `getElementById`
+    - Changed generating number of sliding pizza iterations to 20 from 200
+
+#### Improvements after optimizations
+
+|   Test    |   Result  |
+|-----------|-----------|
+|   PageSpeed Score before optimizations    |   Mobile: 31/100, Desktop: 70/100  |
+|   PageSpeed Score **after** optimizations |   Mobile: 86/100, Desktop: 92/100  |
+|   Frame Rate before optimizations         |   FPS: ~20 *(from chrome dev tool fps meter)*, Average scripting time to generate last 10 frames: ~6ms |
+|   Frame Rate **after** optimizations      |   FPS: ~60 *(from chrome dev tool fps meter)*, Average scripting time to generate last 10 frames: ~0.3ms|
+|   Time to resize pizzas before optimizations  |   ~250ms  |
+|   Time to resize pizzas **after** optimizations   |   ~2ms    |
+

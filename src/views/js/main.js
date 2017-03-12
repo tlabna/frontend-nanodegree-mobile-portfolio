@@ -549,6 +549,7 @@ function updatePositions() {
     phase = Math.sin((scroll) + (i % 5));
     // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     var left = -items[i].basicLeft + 1000 * phase + 'px';
+        // translateX() and translateZ(0) transform functions to the sliding pizza elements within the updatePositions function to improve css animations
         items[i].style.transform = "translateX("+left+") translateZ(0)";
   }
 
